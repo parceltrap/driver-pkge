@@ -16,7 +16,7 @@ class PKGE implements Driver
 {
     public const IDENTIFIER = 'pkge';
 
-    public const BASE_URI = 'https://api.pkge.net/v1';
+    public const BASE_URI = 'https://api.pkge.net';
 
     private ClientInterface $client;
 
@@ -27,7 +27,7 @@ class PKGE implements Driver
 
     public function find(string $identifier, array $parameters = []): TrackingDetails
     {
-        $response = $this->client->request('GET', 'packages', [
+        $response = $this->client->request('GET', 'v1/packages', [
             RequestOptions::HEADERS => $this->getHeaders(),
             RequestOptions::QUERY => array_merge(['trackNumber' => $identifier], $parameters),
         ]);
