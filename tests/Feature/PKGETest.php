@@ -30,9 +30,49 @@ it('can retrieve the PKGE driver from ParcelTrap', function () {
 
 it('can call `find` on the PKGE driver', function () {
     $trackingDetails = [
-        'tracking_number' => 'ABCDEFG12345',
-        'status' => 'transit',
-        'estimated_delivery' => '2022-01-01T00:00:00+00:00',
+        'code' => 200,
+        'payload' => [
+            'created_at' => '2021-07-06T13:46:25+03:00',
+            'updated_at' => '2021-07-06T13:46:25+03:00',
+            'started_tracking_at' => '2021-07-06T13:46:25+03:00',
+            'track_number' => 'UA937578848US',
+            'origin' => null,
+            'destination' => null,
+            'last_status' => 'Receiving status...',
+            'status' => -1,
+            'checkpoints' => [
+                [
+                    'id' => '',
+                    'date' => '2021-07-06T13:46:25+03:00',
+                    'title' => 'Tracking started',
+                    'location' => 'The package most likely isn\'t shipped yet',
+                    'latitude' => null,
+                    'longitude' => null,
+                    'courier_id' => null,
+                ],
+            ],
+            'last_status_date' => '2021-07-06T13:46:25+03:00',
+            'est_delivery_date_from' => null,
+            'est_delivery_date_to' => null,
+            'extra_track_numbers' => [],
+            'hash' => 'f25370e9',
+            'consolidated_track_number' => null,
+            'consolidation_date' => null,
+            'destination_country_code' => 'ru',
+            'updating' => false,
+            'last_tracking_date' => null,
+            'days_on_way' => 1,
+            'weight' => null,
+            'extra_info' => [],
+            'couriers_ids' => [
+                1,
+                4,
+                10,
+                366,
+            ],
+            'courier_id' => null,
+            'info' => [],
+        ],
     ];
 
     $httpMockHandler = new MockHandler([
@@ -50,12 +90,12 @@ it('can call `find` on the PKGE driver', function () {
         client: $httpClient,
     ));
 
-    expect($this->app->make(Factory::class)->driver('pkge')->find('ABCDEFG12345'))
+    expect($this->app->make(Factory::class)->driver('pkge')->find('UA937578848US'))
         ->toBeInstanceOf(TrackingDetails::class)
-        ->identifier->toBe('ABCDEFG12345')
-        ->status->toBe(Status::In_Transit)
-        ->status->description()->toBe('In Transit')
-        ->summary->toBe('Package status is: In Transit')
-        ->estimatedDelivery->toEqual(new DateTimeImmutable('2022-01-01T00:00:00+00:00'))
-        ->raw->toBe($trackingDetails);
+        ->identifier->toBe('UA937578848US')
+        ->status->toEqual(Status::Unknown)
+        ->status->description()->toBe('Unknown')
+        ->summary->toBe('Receiving status...')
+        ->estimatedDelivery->toBeNull()
+        ->raw->toBe($trackingDetails['payload']);
 });
