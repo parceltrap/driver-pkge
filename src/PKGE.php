@@ -51,7 +51,6 @@ class PKGE implements Driver
 
         assert(isset($json['track_number']), 'The shipment tracking number is missing from the response');
         assert(isset($json['status']), 'The status is missing from the response');
-        assert(isset($json['last_status']), 'The summary is missing from the response');
         assert(isset($json['checkpoints']), 'The events array is missing from the response');
 
         return new TrackingDetails(
