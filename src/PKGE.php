@@ -14,13 +14,13 @@ use ParcelTrap\Enums\Status;
 
 class PKGE implements Driver
 {
-    public const IDENTIFIER = 'pkge';
+    public const string IDENTIFIER = 'pkge';
 
-    public const BASE_URI = 'https://api.pkge.net';
+    public const string BASE_URI = 'https://api.pkge.net';
 
     private ClientInterface $client;
 
-    public function __construct(private readonly string $apiKey, ?ClientInterface $client = null)
+    public function __construct(private readonly string $apiKey, ClientInterface|null $client = null)
     {
         $this->client = $client ?? GuzzleFactory::make(['base_uri' => self::BASE_URI]);
     }
@@ -35,6 +35,8 @@ class PKGE implements Driver
         if ($response->getStatusCode() === 404) {
             return new TrackingDetails(
                 identifier: $identifier,
+                summary: null,
+                estimatedDelivery: null,
                 status: Status::Not_Found,
                 events: [],
                 raw: [],
@@ -55,9 +57,9 @@ class PKGE implements Driver
 
         return new TrackingDetails(
             identifier: $json['track_number'],
-            status: $this->mapStatus($json['status'] ?? -1),
             summary: $json['last_status'] ?? null,
             estimatedDelivery: $json['est_delivery_date_from'] ? new DateTimeImmutable($json['est_delivery_date_from']) : null,
+            status: $this->mapStatus($json['status'] ?? -1),
             events: $json['checkpoints'] ?? [],
             raw: $json,
         );

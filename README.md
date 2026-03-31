@@ -38,7 +38,7 @@ Configure the relevant environment variables in your `.env` file.
 
 ## Change log
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [GitHub Releases][link-github-releases] for more information on what has changed recently.
 
 ## Testing
 
@@ -75,12 +75,13 @@ Read more about Treeware at [treeware.earth][link-treeware].
 
 [ico-version]: https://img.shields.io/packagist/v/parceltrap/driver-pkge.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-github-actions]: https://img.shields.io/github/workflow/status/parceltrap/driver-pkge/Tests.svg?style=flat-square
-[ico-static-analysis]: https://img.shields.io/github/workflow/status/parceltrap/driver-pkge/Static%20Analysis.svg?style=flat-square&label=Static%20Analysis
+[ico-github-actions]: https://img.shields.io/github/actions/workflow/status/parceltrap/driver-pkge/tests.yml?branch=main&style=flat-square&label=Tests
+[ico-static-analysis]: https://img.shields.io/github/actions/workflow/status/parceltrap/driver-pkge/static.yml?branch=main&style=flat-square&label=Static%20Analysis
 [ico-downloads]: https://img.shields.io/packagist/dt/parceltrap/driver-pkge.svg?style=flat-square
 [ico-treeware-gifting]: https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/parceltrap/driver-pkge
+[link-github-releases]: https://github.com/parceltrap/driver-pkge/releases
 [link-github-actions]: https://github.com/parceltrap/driver-pkge/actions
 [link-static-analysis]: https://github.com/parceltrap/driver-pkge/actions/workflows/static.yml
 [link-downloads]: https://packagist.org/packages/parceltrap/driver-pkge
